@@ -9,27 +9,8 @@ import { useCart } from '../../hooks/useCart';
 const Header = (): JSX.Element => {
   const { cart } = useCart();
 
-  //função new set remove dados duplicados no array
-  let uniquesProducts = new Set(cart);
+  const cartSize = cart.length;
   
-  // const c = products.map(p => {
-  //   const ps: Product[] = [];
-  //   let count = 0;
-  //   cart.map(c => {
-  //     if(p.id == c.id){
-  //       ps.push(c);
-  //       count += 1;
-  //     }
-  //   });
-
-  //   return count;
-  // })
-  
-
-  const cartSize = uniquesProducts.size;
-
-
-
   return (
     <Container>
       <Link to="/">

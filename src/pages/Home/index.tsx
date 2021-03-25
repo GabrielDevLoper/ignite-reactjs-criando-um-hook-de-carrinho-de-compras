@@ -5,6 +5,7 @@ import { ProductList } from './styles';
 import { api } from '../../services/api';
 import { formatPrice } from '../../util/format';
 import { useCart } from '../../hooks/useCart';
+import { toast } from 'react-toastify';
 
 interface Product {
   id: number;
@@ -17,9 +18,9 @@ interface ProductFormatted extends Product {
   priceFormatted: string;
 }
 
+
 interface CartItemsAmount {
   [key: number]: number;
-  
 }
 
 
@@ -27,16 +28,15 @@ const Home = (): JSX.Element => {
   const [products, setProducts] = useState<ProductFormatted[]>([]);
   const { addProduct, cart } = useCart();
   
-  console.log(cart);
+
   const cartItemsAmount = cart.reduce((sumAmount, product) => {
     sumAmount[product.id] = product.amount;
-
     
     return sumAmount;
     
   }, {} as CartItemsAmount);
 
-
+ 
   useEffect(() => {
     async function loadProducts() {
      const response = await api.get("/products");
@@ -50,18 +50,25 @@ const Home = (): JSX.Element => {
      
      setProducts(data);
     }
-
+    
     loadProducts();
   }, []);
+
+
+  useEffect(() => {
+    localStorage.setItem('@RocketShoes:cart', JSON.stringify(cart));
+  }, [cart]);
 
 
 
   async function handleAddProduct(id: number) {
     await addProduct(id);
+    
   }
 
   return (
     <ProductList>
+
       {products.map(product => (
         <li key={product.id}>
           <img src={product.image} alt="Tênis de Caminhada Leve Confortável" />
