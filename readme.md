@@ -1,4 +1,4 @@
-# 1 - Passo a passo para incializar a aplicação
+# Passo a passo para incializar a aplicação
 
 ### 1. yarn ou npm install (serve para instalar as dependências do projeto)
 
