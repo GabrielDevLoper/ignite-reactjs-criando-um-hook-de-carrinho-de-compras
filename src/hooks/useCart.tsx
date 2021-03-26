@@ -8,7 +8,7 @@ import {
 } from "react";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
-import { Product, Stock } from "../types";
+import { Product } from "../types";
 
 interface CartProviderProps {
   children: ReactNode;
@@ -129,7 +129,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
 
       const updatedCart = [...cart];
       const productExists = updatedCart.find(
-        (product) => productId == product.id
+        (product) => productId === product.id
       );
 
       if (productExists) {

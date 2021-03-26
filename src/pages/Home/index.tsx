@@ -5,7 +5,6 @@ import { ProductList } from "./styles";
 import { api } from "../../services/api";
 import { formatPrice } from "../../util/format";
 import { useCart } from "../../hooks/useCart";
-import { toast } from "react-toastify";
 
 interface Product {
   id: number;
@@ -39,7 +38,7 @@ const Home = (): JSX.Element => {
       const data = response.data;
 
       data.map((product) => {
-        product.priceFormatted = formatPrice(product.price);
+        return (product.priceFormatted = formatPrice(product.price));
       });
 
       setProducts(data);
@@ -47,10 +46,6 @@ const Home = (): JSX.Element => {
 
     loadProducts();
   }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem("@RocketShoes:cart", JSON.stringify(cart));
-  // }, [cart]);
 
   async function handleAddProduct(id: number) {
     await addProduct(id);
